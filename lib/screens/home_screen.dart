@@ -25,10 +25,15 @@ class HomeScreen extends StatelessWidget {
             return const Center(child: CircularProgressIndicator());
           }
           final products = snapshot.data!;
-          final bestSellers = products.where((item) => item.isBestSeller).toList();
+          final bestSellers = products
+              .where((item) => item.isBestSeller)
+              .toList();
           final categories = <String, String>{};
           for (final product in products) {
-            categories.putIfAbsent(product.category, () => product.images.first);
+            categories.putIfAbsent(
+              product.category,
+              () => product.images.first,
+            );
           }
 
           return CustomScrollView(
@@ -42,20 +47,22 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               SliverPadding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 8,
+                ),
                 sliver: SliverGrid(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      final product = bestSellers[index];
-                      return ProductCard(
-                        product: product,
-                        onInspect: () => context.go('/product/${product.id}'),
-                      );
-                    },
-                    childCount: bestSellers.length,
-                  ),
+                  delegate: SliverChildBuilderDelegate((context, index) {
+                    final product = bestSellers[index];
+                    return ProductCard(
+                      product: product,
+                      onInspect: () => context.go('/product/${product.id}'),
+                    );
+                  }, childCount: bestSellers.length),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: _bestSellerColumns(MediaQuery.sizeOf(context).width),
+                    crossAxisCount: _bestSellerColumns(
+                      MediaQuery.sizeOf(context).width,
+                    ),
                     crossAxisSpacing: 18,
                     mainAxisSpacing: 18,
                     childAspectRatio: 0.72,
@@ -71,18 +78,17 @@ class HomeScreen extends StatelessWidget {
               SliverPadding(
                 padding: const EdgeInsets.fromLTRB(20, 8, 20, 40),
                 sliver: SliverGrid(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      final category = categories.entries.elementAt(index);
-                      return _CategoryCard(
-                        name: category.key,
-                        imageUrl: category.value,
-                      );
-                    },
-                    childCount: categories.length,
-                  ),
+                  delegate: SliverChildBuilderDelegate((context, index) {
+                    final category = categories.entries.elementAt(index);
+                    return _CategoryCard(
+                      name: category.key,
+                      imageUrl: category.value,
+                    );
+                  }, childCount: categories.length),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: MediaQuery.sizeOf(context).width >= 980 ? 3 : 2,
+                    crossAxisCount: MediaQuery.sizeOf(context).width >= 980
+                        ? 3
+                        : 2,
                     crossAxisSpacing: 18,
                     mainAxisSpacing: 18,
                     childAspectRatio: 1.3,
@@ -133,10 +139,10 @@ class _SiteHeader extends StatelessWidget {
             child: Text(
               'Kubra Deniz KUYUMCULUK',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    color: AppColors.gold,
-                    letterSpacing: 0.7,
-                    fontWeight: FontWeight.w600,
-                  ),
+                color: AppColors.gold,
+                letterSpacing: 0.7,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
           if (!isMobile)
@@ -163,9 +169,9 @@ class _MenuItem extends StatelessWidget {
     return Text(
       label,
       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            color: AppColors.ivory,
-            fontWeight: FontWeight.w500,
-          ),
+        color: AppColors.ivory,
+        fontWeight: FontWeight.w500,
+      ),
     );
   }
 }
@@ -210,7 +216,10 @@ class _HeroSection extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.gold,
                     foregroundColor: AppColors.matteBlack,
-                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 14,
+                    ),
                   ),
                   child: const Text('Koleksiyonu Kesfet'),
                 ),
@@ -291,9 +300,9 @@ class _CategoryCard extends StatelessWidget {
               padding: const EdgeInsets.all(14),
               child: Text(
                 name,
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      color: AppColors.ivory,
-                    ),
+                style: Theme.of(
+                  context,
+                ).textTheme.titleLarge?.copyWith(color: AppColors.ivory),
               ),
             ),
           ),
