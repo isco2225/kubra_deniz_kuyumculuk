@@ -10,6 +10,7 @@ class MockProductRepository implements ProductRepository {
           'İnce örgü dokusuyla dokunan geniş bileklik; parlak altın yüzeyi ve sağlam klipsiyle '
           'gündüzden geceye her kombine modern bir ışıltı katar. Çift kullanım için ideal bir çift.',
       images: [
+        'assets/bileklikler/jessica_model_bileklik_3.png',
         'assets/bileklikler/jessica_model_bileklik_1.jpg',
         'assets/bileklikler/jessica_model_bileklik_2.jpg',
       ],
@@ -45,7 +46,11 @@ class MockProductRepository implements ProductRepository {
       ],
       category: 'Kolyeler',
       isBestSeller: true,
-      specs: {'Parça': 'Kolye + Bileklik', 'Zincir': 'Gurmet', 'Taş': 'Baget kesim'},
+      specs: {
+        'Parça': 'Kolye + Bileklik',
+        'Zincir': 'Gurmet',
+        'Taş': 'Baget kesim',
+      },
     ),
     ProductModel(
       id: 'KLY-002',
@@ -74,7 +79,11 @@ class MockProductRepository implements ProductRepository {
       ],
       category: 'Kolyeler',
       isBestSeller: false,
-      specs: {'Parça': 'Kolye + Bileklik', 'Zincir': 'Gurmet', 'Detay': 'Pavé halka'},
+      specs: {
+        'Parça': 'Kolye + Bileklik',
+        'Zincir': 'Gurmet',
+        'Detay': 'Pavé halka',
+      },
     ),
   ];
 
@@ -100,8 +109,12 @@ class MockProductRepository implements ProductRepository {
   @override
   Future<Map<String, String>> getCategoryCoverImages() async {
     return {
-      'Kolyeler': _products.firstWhere((p) => p.category == 'Kolyeler').images[0],
-      'Bilezikler': _products.firstWhere((p) => p.category == 'Bilezikler').images[0],
+      'Kolyeler': _products
+          .firstWhere((p) => p.category == 'Kolyeler')
+          .images[0],
+      'Bilezikler': _products
+          .firstWhere((p) => p.category == 'Bilezikler')
+          .images[0],
     };
   }
 }

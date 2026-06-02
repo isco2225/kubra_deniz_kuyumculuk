@@ -3,8 +3,8 @@ import 'package:go_router/go_router.dart';
 
 import 'repositories/mock_product_repository.dart';
 import 'repositories/product_repository.dart';
-import 'screens/home_screen.dart';
-import 'screens/product_detail_screen.dart';
+import 'screens/home/home_screen.dart';
+import 'screens/product_detail/product_detail_screen.dart';
 
 final ProductRepository productRepository = MockProductRepository();
 
